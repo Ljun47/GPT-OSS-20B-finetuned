@@ -1,0 +1,46 @@
+# Byte-compiled / optimized / DLL files
+**/__pycache__/
+*.py[cod]
+*$py.class
+
+# Large Datasets (Only train_chat.jsonl will be uploaded)
+**/train.jsonl
+**/train_AAPL.jsonl
+**/train_policy.jsonl
+
+# Excluded prototype / backtesting files
+y.py
+engineering.py
+models.py
+backtest.py
+comparing.py
+comparing_fix.py
+datatest.py
+test.py
+finetest.py
+colab_models_batch_backtest.py
+**/y.py
+**/engineering.py
+**/models.py
+**/backtest.py
+**/comparing.py
+**/comparing_fix.py
+**/datatest.py
+**/test.py
+**/finetest.py
+**/colab_models_batch_backtest.py
+
+# Large model weights / merged checkpoints / adapter archives
+**/gpt-oss-20b-trading-merged/
+*.zip
+**/*.zip
+**/lora_trading_policy_mlx/
+**/lora_trading_policy_mlx_simple/
+
+# Local logs and progress plots
+**/training_log.csv
+**/training_progress.png
+
+# OS-specific files
+.DS_Store
+**/.DS_Store
