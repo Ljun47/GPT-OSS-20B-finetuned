@@ -1,10 +1,10 @@
-# 📈 gpt-oss-trading-policy: LLM 기반 트레이딩 정책 파인튜닝 프로젝트
+# gpt-oss-trading-policy: LLM 기반 트레이딩 정책 파인튜닝 프로젝트
 
-이 저장소는 룰 기반(Rule-based) 퀀트 투자 전략을 행동 모방(Behavioral Cloning) 기법을 통해 LLM(Large Language Model)에 이식하는 파인튜닝 파이프라인을 다룹니다. Apple Silicon 환경(M1/M2/M3 시리즈 Mac)에 최적화된 **MLX 라이브러리**를 사용하여 200억 매개변수 규모의 `gpt-oss-20b` MoE(Mixture of Experts) 모델을 LoRA 파인튜닝하는 안정화된 코드를 포함하고 있습니다.
+이 저장소는 미국 주식 자동 매매 서비스에 최적화된 오픈소스 LLM(Large Language Model)을 파인튜닝하는 파이프라인을 다룹니다. Apple Silicon 환경(M1/M2/M3 시리즈 Mac)에 최적화된 **MLX 라이브러리**를 사용하여 200억 매개변수 규모의 `gpt-oss-20b` MoE(Mixture of Experts) 모델을 LoRA 파인튜닝하는 안정화된 코드를 포함하고 있습니다.
 
 ---
 
-## 📂 저장소 구조 (Repository Structure)
+## 저장소 구조 (Repository Structure)
 
 프로젝트 저장소는 전문적인 설계 구조에 맞추어 다음과 같이 데이터 수집, 가공, 학습 스크립트가 체계화되어 분리되어 있습니다.
 
@@ -21,7 +21,7 @@ gpt-oss-trading-policy/
 └── README.md
 ```
 
-### 📁 상세 파일 설명
+### 상세 파일 설명
 *   **`src/data_pipeline.py`**: 9개 미국 기술주 역사적 시세를 파싱하여 단기/장기 이동평균 추세, 변동성, 유동성 지표에 기반한 룰 기반 포지션 타겟 결정을 자동 축적하는 파이프라인.
 *   **`src/preprocess.py`**: 빌드된 원본 트레이딩 레코드를 `tokenizer.apply_chat_template`에 즉시 매핑 가능한 OpenAI 대화형 JSONL 데이터셋으로 전처리.
 *   **`src/train.py`**: LoRA 가중치만 선별 미분 계산하는 `trainable_parameters()` 최적화, `mx.clear_cache()` 메모리 해제 장치를 장착하여 로컬 OOM을 원천 방어하는 메인 파인튜닝 파일.
@@ -29,7 +29,7 @@ gpt-oss-trading-policy/
 
 ---
 
-## 🧠 모델 가중치 (LoRA Adapters) 및 Hugging Face 연동
+## 모델 가중치 (LoRA Adapters) 및 Hugging Face 연동
 
 학습 결과로 산출되는 LoRA 어댑터 가중치(`adapters.npz` 파일, 약 98MB)는 Git 저장소의 크기 제한 및 청결한 관리를 위해 Hugging Face Model Hub에 분리 호스팅하고 있습니다.
 
@@ -43,7 +43,7 @@ gpt-oss-trading-policy/
 
 ---
 
-## ⚙️ 실행 방법 (Usage)
+## 실행 방법 (Usage)
 
 ### 1. 의존성 패키지 설치
 Apple Silicon 기기 혹은 로컬 파이썬 가상 환경에서 다음 라이브러리를 설치합니다.
@@ -68,10 +68,10 @@ python src/train.py
 
 ---
 
-## 🧠 핵심 기술적 특징 (Key Technical Features)
+## 핵심 기술적 특징 (Key Technical Features)
 
 1.  **MoE 모델용 LoRA 적용 설계**:
-    FFN 전문가(Experts) 영역 대신 모든 토큰이 경유하는 Self-Attention 레이어(`q_proj`, `v_proj`)만을 정밀 타격함으로써 학습 파라미터를 최소화하고 Mac Studio 수준의 VRAM에서 부드럽게 작동합니다.
+    FFN 전문가(Experts) 영역 대신 모든 토큰이 경유하는 Self-Attention 레이어(`q_proj`, `v_proj`)만을 정밀 타격함으로써 학습 파라미터를 최소화하고 GPU 점유율을 최적화합니다.
 2.  **MLX 지연 평가(Lazy Evaluation) 메모리 제어**:
     `mx.eval()`을 이용해 로스 연산을 GPU 디바이스에 즉시 바인딩 동기화하고 `mx.clear_cache()`로 주기적 메모리 청소를 실행하여 GPU VRAM OOM 현상을 원천 방지합니다.
 3.  **Chat Format 데이터셋 연동**:
