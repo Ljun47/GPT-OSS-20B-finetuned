@@ -30,16 +30,25 @@ gpt-oss-trading-policy/
 
 ---
 
-## 모델 가중치 (LoRA Adapters) 및 Hugging Face 연동
+## 🚀 모델 배포 (Model Release)
 
-학습 결과로 산출되는 LoRA 어댑터 가중치(`adapters.npz` 파일, 약 98MB)는 Git 저장소의 크기 제한 및 청결한 관리를 위해 Hugging Face Model Hub에 분리 호스팅하고 있습니다.
+본 프로젝트를 통해 학습이 완료된 최종 `gpt-oss-20b` 트레이딩 병합 모델은 **Hugging Face Hub**에 공식 배포되어 있습니다.
 
-*   **Hugging Face 저장소 링크**: [mlx-community/gpt-oss-20b-trading-lora-merged](https://huggingface.co/mlx-community/gpt-oss-20b-trading-lora-merged) (예시)
-*   **어댑터 다운로드 및 병합**:
+*   **Hugging Face 저장소 링크**: [jun47/gpt-oss-20b-trading-merged](https://huggingface.co/jun47/gpt-oss-20b-trading-merged)
+*   **모델 로드 및 실행 예시 (Transformers)**:
     ```python
-    from mlx_lm import load
-    # Hugging Face 허브에서 로라 병합 모델을 직접 다운로드하여 로드합니다.
-    model, tokenizer = load("mlx-community/gpt-oss-20b-trading-lora-merged")
+    import torch
+    from transformers import AutoModelForCausalLM, AutoTokenizer
+
+    model_id = "jun47/gpt-oss-20b-trading-merged"
+
+    tokenizer = AutoTokenizer.from_pretrained(model_id)
+    model = AutoModelForCausalLM.from_pretrained(
+        model_id,
+        torch_dtype=torch.float16,
+        device_map="auto"
+    )
+    print("🎉 20B 트레이딩 병합 모델 로드 성공!")
     ```
 
 ---
