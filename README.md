@@ -30,7 +30,7 @@ gpt-oss-trading-policy/
 
 ---
 
-## 🚀 모델 배포 (Model Release)
+## 모델 배포 (Model Release)
 
 본 프로젝트를 통해 학습이 완료된 최종 `gpt-oss-20b` 트레이딩 병합 모델은 **Hugging Face Hub**에 공식 배포되어 있습니다.
 
