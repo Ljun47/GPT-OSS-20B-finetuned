@@ -1,6 +1,7 @@
 # gpt-oss:20B : LLM 기반 트레이딩 정책 파인튜닝 프로젝트
 
-이 저장소는 미국 주식 자동 매매 서비스에 최적화된 오픈소스 LLM(Large Language Model)을 파인튜닝하는 파이프라인을 다룹니다. Apple Silicon 환경(M1/M2/M3 시리즈 Mac)에 최적화된 **MLX 라이브러리**를 사용하여 200억 매개변수 규모의 `gpt-oss-20b` MoE(Mixture of Experts) 모델을 LoRA 파인튜닝하는 안정화된 코드를 포함하고 있습니다.
+이 저장소는 미국 주식 자동 매매 서비스에 최적화된 오픈소스 LLM(Large Language Model)을 파인튜닝하는 파이프라인을 다룹니다. 
+Apple Silicon 환경(M1/M2/M3 시리즈 Mac)에 최적화된 **MLX 라이브러리**를 사용하여 200억 매개변수 규모의 `gpt-oss:20b` MoE(Mixture of Experts) 모델을 LoRA 파인튜닝하는 안정화된 코드를 포함하고 있습니다.
 
 ---
 
