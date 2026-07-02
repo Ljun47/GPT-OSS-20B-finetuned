@@ -44,3 +44,7 @@ colab_models_batch_backtest.py
 # OS-specific files
 .DS_Store
 **/.DS_Store
+
+# Hugging Face upload scripts
+upload_advanced_merged.py
+
